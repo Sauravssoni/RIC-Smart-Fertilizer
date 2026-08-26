@@ -1,0 +1,11 @@
+{
+  "PIB_DoF_public_aggregates":"LIVE_PUBLIC",
+  "Rajasthan_crop_statistics":"LIVE_PUBLIC",
+  "Soil_Health_Card":"CONTRACT_READY",
+  "AgriStack_Crop_Sown_KDSS":"CONTRACT_READY",
+  "iFMS_DBT_FFS_DRS":"CONTRACT_READY",
+  "IMD_weather":"CONTRACT_READY",
+  "BHASHINI":"CONTRACT_READY",
+  "SUTRA_ID_Edge":"DEMO_SANDBOX",
+  "TraceGraph_Quality_Sentinel":"DEMO_SANDBOX"
+}

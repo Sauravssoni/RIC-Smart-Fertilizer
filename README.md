@@ -1,145 +1,119 @@
 # RAJ-URVARA AI
 ## Rajasthan Fertilizer Intelligence & Trust Grid
 
+> **Evaluator Release v4 — State Fertilizer Operations Console**  
 > **Right Nutrient · Right Plot · Right Time · Right Bag**
 
 RAJ-URVARA AI is Syntheon Tech's evaluator-grade prototype for the Rajasthan Innovation Challenge problem statement **AI/ML-Driven Smart Fertilizer Formulation & Distribution Framework**.
 
-It is **not another fertilizer booking portal**, and it does not replace iFMS, DBT, FFS, Soil Health Card or AgriStack. It is a governed **state intelligence, orchestration and trust control plane** around those rails:
+It is not another fertilizer-booking portal. It is a governed **State intelligence, orchestration and trust control plane** designed to complement iFMS/DBT, FFS/DRS, Soil Health Card, AgriStack and approved State infrastructure:
 
-`soil/crop truth → nutrient need → probabilistic demand → fair allocation → physical custody → dealer/farmer execution → outcome learning`
+`soil/crop truth → nutrient need → probabilistic demand → fair allocation → custody → field execution → outcome learning`
 
-## Evaluator quick route — 3 minutes
+## Evaluator quick route — 90 seconds
 
-1. Open `index.html` → **Run Kharif Stress Demo**.
-2. Watch a synthetic crop/weather stress signal change DemandCast P90 risk.
-3. See Allocation Twin propose a fairness-constrained transfer requiring officer approval.
-4. Follow TraceGraph custody and the SUTRA-ID Edge offline receipt/sync.
-5. Open `docs/EVALUATOR_DEFENSE.md` for the hard questions: Why not iFMS? Why DLT? Can the SLM prescribe? Why hardware? What if SHC is stale?
-6. Open `docs/PILOT_SCORECARD.md` for the 90-day measurable pilot.
+1. Open `index.html` / `dashboard/index.html`.
+2. Click **Run judge demo**.
+3. Watch a synthetic Kharif stress event change Sikar DAP P90 risk.
+4. DemandCast widens the uncertainty envelope.
+5. Allocation Twin produces a fairness-constrained recommendation.
+6. A Government officer authorizes the transfer and receives a Decision Receipt.
+7. TraceGraph opens custody evidence.
+8. SUTRA-ID Edge records the last-mile acknowledgement offline.
+9. Reconnect: the signed event synchronizes once; a retry is duplicate-suppressed.
 
-## Why this framing is Rajasthan-native
+The interface is deliberately a **working operations console, not a pitch microsite**: district risk map, stock table, live event stream, decision workbench, warehouse reconciliation, forecast workbench, trace explorer, farmer/plot lookup and SUTRA field terminal. See `docs/OPERATIONS_CONSOLE_V4.md`.
+
+## Rajasthan evidence
 
 Public Government of India data for Kharif 2026 through **29 July 2026** reports for Rajasthan:
 
-| Grade | Requirement | Availability | DBT Sales | Closing Stock | Unit |
-|---|---:|---:|---:|---:|---|
-| Urea | 6.71 | 11.31 | 8.05 | 3.27 | LMT |
-| DAP | 3.21 | 2.73 | 2.08 | 0.65 | LMT |
-| MOP | 0.05 | 0.15 | 0.05 | 0.10 | LMT |
-| NPKS | 0.77 | 1.40 | 0.68 | 0.72 | LMT |
+| Grade | Requirement | Availability | DBT sales | Closing stock |
+|---|---:|---:|---:|---:|
+| Urea | 6.71 | 11.31 | 8.05 | 3.27 LMT |
+| DAP | 3.21 | 2.73 | 2.08 | 0.65 LMT |
+| MOP | 0.05 | 0.15 | 0.05 | 0.10 LMT |
+| NPKS | 0.77 | 1.40 | 0.68 | 0.72 LMT |
 
-These State aggregates are **not evidence of leakage or a statewide shortage**. They demonstrate why grade-, geography-, crop-stage- and time-specific intelligence is more useful than static historical allocation alone.
+These aggregates are **not proof of leakage or a statewide shortage**. They show why planning must move beyond static State totals toward fertilizer-grade × geography × crop-stage × week intelligence.
 
-Primary source: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2294272
+Primary public evidence: PIB / Department of Fertilizers, 01 Apr–29 Jul 2026: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2294272
 
-The Department of Fertilizers states that iFMS already tracks movement of major subsidized fertilizers, while district-level distribution is undertaken by State Governments. RAJ-URVARA therefore focuses on the challenge's missing decision layer: prediction, soil/crop alignment, rebalancing, custody evidence and exception intelligence.
+## Challenge → executable module
 
-## Challenge → module alignment
-
-| Challenge requirement / gap | RAJ-URVARA response |
+| Challenge gap | RAJ-URVARA response |
 |---|---|
-| Static historical demand | **DemandCast** — grade × geography × week P10/P50/P90 forecasts |
-| Soil/crop-specific formulation | **NutrientTwin + UrvaraRX** — authorized agronomic rules + constrained product mapping |
-| Limited stock visibility | **Allocation Twin + StockPulse** — service-level risk and human-approved rebalancing |
-| End-to-end track-and-trace | **TraceGraph** — tamper-evident custody events, sensitive data off-ledger |
-| Leakage risk | **Leakage Sentinel** — explainable human-review priority, never auto-denial |
-| Quality/lot assurance gap | **Quality Sentinel** — evidence-linked risk-based sampling support, never certification |
-| Rural connectivity/digital literacy | **SUTRA-ID Edge + BHASHINI-ready assisted mode** |
-| Sustainable/balanced use | **Balanced-Use Policy Lab** with explicit non-entitlement language |
+| Static historical allocation | **DemandCast** — P10/P50/P90 district × grade × week forecasts |
+| No soil/crop-stage formulation intelligence | **NutrientTwin + UrvaraRX** — authorized agronomic rules + constrained product mapping |
+| Limited real-time stock visibility | **Allocation Twin + StockPulse** — service-level risk and human-approved rebalancing |
+| No end-to-end traceability | **TraceGraph** — tamper-evident custody events; PII stays off-ledger |
+| Leakage / diversion risk | **Leakage Sentinel** — explainable human-review priority only |
+| Product quality risk | **Quality Sentinel** — evidence-linked inspection prioritization only |
+| Weak last-mile connectivity | **SUTRA-ID Edge + BHASHINI-ready assisted mode** |
 
-## Core system
+## Core engineering principles
 
-### 1. NutrientTwin
-Versioned plot Nutrient Passport combining authorized Soil Health Card parameters, crop/crop-stage, weather and approved agronomic context. Source, freshness and confidence are first-class fields.
+### DemandCast
+- probabilistic P10/P50/P90 output instead of false point precision
+- rolling-origin and district-holdout release gates
+- hierarchy reconciliation
+- stock-out censoring: zero sales during no-stock periods are not learned as zero demand
+- reason-coded feature contributions and drift watches
 
-### 2. UrvaraRX
-A guarded recommendation path. Numeric agronomic values are **never generated by the language model**. Production values may only come from authorized SHC/STCR/Department rules, followed by a constrained permitted-product and stock optimizer.
+### NutrientTwin / UrvaraRX
+- source, freshness, crop and crop-stage are first-class fields
+- numeric agronomic values may only originate from authorized deterministic services/rules
+- RAJ-NUTRI may retrieve, call tools and explain; it cannot invent a fertilizer dose/product
 
-### 3. DemandCast
-District × fertilizer-grade × week forecasting with P10/P50/P90 planning envelopes, stock-out censoring, rolling-origin validation, district hold-outs, hierarchy reconciliation, drift checks and reason codes.
+### Allocation Twin
+- minimum source stock-cover floor
+- uncertainty-aware service-level planning
+- remote/low-connectivity regions cannot be optimized away
+- consequential actions require human approval or reason-coded override
+- every action produces a Decision Receipt
 
-### 4. Allocation Twin
-Human-approved stock rebalancing under service-level and **fairness constraints**. Remote/low-connectivity regions cannot be optimized away; minimum stock-cover floors are explicit constraints and overrides require reasons.
+### TraceGraph / StockPulse
+- dispatch → warehouse → transfer → dealer → retail reference → field acknowledgement
+- PII and raw Government documents stay off-chain
+- custody proof can be anchored to permissioned DLT **or** an approved signed append-only journal
+- QR/lot scans + mobile geofence evidence by default; dedicated IoT/GPS only where justified
 
-### 5. TraceGraph + StockPulse
-Tamper-evident custody events across dispatch, warehouse, transfer, dealer receipt and retail reference. Farmer PII and sensitive evidence remain off-chain. The domain model can run on a permissioned DLT or an approved signed append-only journal; the solution is not blockchain-dependent.
-
-### 6. Leakage Sentinel
-Explainable anomaly prioritization for officers. It **never auto-denies subsidy or takes enforcement action**.
-
-### 7. Quality Sentinel
-Links lot custody to COA/lab/sample references and prioritizes authorized inspection. It **does not certify fertilizer quality** and does not automate enforcement.
-
-### 8. RAJ-NUTRI SLM
-Small multilingual tool-using copilot design. Candidate foundation: Qwen3 1.7B-class model with LoRA/QLoRA + RAG + schema-constrained tools. Hard prohibitions include invented fertilizer dose/product, autonomous subsidy denial, official-record mutation and quality enforcement.
-
-### 9. SUTRA-ID Edge assisted mode
-Optional last-mile channel for voice-first/offline field execution: BHASHINI-ready ASR/TTS/translation, SHC/bag/lot scan, human confirmation, signed local queue and idempotent sync. Web/mobile remain primary; SUTRA is used where connectivity or digital literacy makes assisted service valuable.
-
-### 10. Balanced-Use Policy Lab
-Scenario intelligence for balanced nutrient use and PM-PRANAM-style policy analysis. It never represents a simulated subsidy saving or incentive as guaranteed State revenue.
-
-## Existing national rails we complement
-
-- **iFMS / DBT** — authoritative fertilizer movement/sales rail; RAJ-URVARA adds prediction, decision intelligence and exception reasoning.
-- **FFS / DRS** — fertilizer application/collection and overlapping land-claim workflows; RAJ-URVARA does not recreate them.
-- **Soil Health Card** — 12 soil parameters and State-provided recommendation logic; RAJ-URVARA consumes authorized outputs rather than letting an LLM prescribe. https://soilhealth.dac.gov.in/files/SHC_API_Integration_Guidelines.pdf
-- **AgriStack / Crop Sown / KDSS** — federated farmer/farmland/crop context when authorized.
-- **BHASHINI** — preferred multilingual infrastructure target for assisted voice workflows.
+### SUTRA-ID Edge
+Optional assisted-service endpoint for low-connectivity/digital-literacy/evidence edge cases. Phone/PWA and officer/dealer web remain the primary channels. The evaluator build demonstrates signed offline queueing and idempotent synchronization.
 
 ## Integration truth standard
 
-Every connector is tagged:
-
-- `LIVE_PUBLIC` — published non-sensitive Government/public evidence embedded in the demo.
-- `CONTRACT_READY` — adapter/schema designed; production credentials/authorization required.
-- `DEMO_SANDBOX` — synthetic operational values or local simulation.
+Every connector is explicitly one of:
+- `LIVE_PUBLIC` — published non-sensitive evidence embedded in the prototype
+- `CONTRACT_READY` — adapter/schema prepared; production authorization/credentials required
+- `DEMO_SANDBOX` — synthetic operational values or local simulation
 
 **No Government integration is represented as live unless it actually is.**
 
 See `contracts/integration_status.json` and `docs/INTEGRATION_TRUTH.md`.
 
-## Functional dashboard
+## 90-day impact contract
 
-The Government blue/white evaluator command centre includes:
+Proposed pilot gates — **targets, not achieved claims**:
+- ≥10% relative WAPE improvement vs Department-agreed baseline
+- P90 empirical coverage 85–95%
+- ≥24h warning before stock-cover breach where data availability permits
+- ≥95% required custody-event completeness
+- 0 duplicate SUTRA business events after retry
+- 100% auditable receipts for consequential pilot decisions
 
-- Executive Fertilizer Command Centre
-- Rajasthan Allocation Twin / operational map
-- Kharif 2026 public statewide evidence
-- DemandCast what-if simulator
-- NutrientTwin deterministic risk demo
-- RAJ-NUTRI safety architecture
-- TraceGraph custody chain
-- Leakage and Quality Sentinel demos
-- SUTRA-ID offline receipt and duplicate-safe sync
-- Balanced-Use Policy Lab
-- Integration & model-governance registry
-- Guided evaluator tour
-- **Kharif Stress Demo:** forecast → P90 risk → officer-approved transfer → custody → SUTRA offline acknowledgement → sync → closure
-
-> Map operational values are `DEMO_SANDBOX`; the demo does not claim district production data or live State GIS access.
+Start in **shadow mode**, measure against the baseline, then progressively enable human-approved recommendations. See `docs/PILOT_SCORECARD.md`.
 
 ## Reproducible release gate
 
 ```bash
-python -m unittest discover -s tests -p 'test_*.py' -v
+PYTHONPATH=. python -m unittest discover -s tests -p 'test_*.py' -v
 node --check dashboard/app.js
 ```
 
-Current release: **9/9 Python evaluator gates pass locally**, plus JavaScript syntax validation and browser interaction QA of the repaired build.
+Current evaluator release: **9/9 Python safety/engineering gates pass locally**, JavaScript syntax passes, and the v4 console has been browser-tested across its operational flows and 390 px mobile layout.
 
-The automated GitHub Actions hook is intentionally not enabled in this repository while GitHub is returning a platform-side `BuildFailed/startup_failure` before any job is created. The test suite itself is committed and independently runnable.
-
-## 90-day pilot philosophy
-
-Launch in **shadow mode first**. Compare DemandCast against a simple agreed baseline before allowing recommendations into officer workflow. Then progressively enable human-approved Allocation Twin, selected custody routes and assisted SUTRA points. Measure forecast error, quantile calibration, low-stock-cover days, emergency-transfer lead time, trace completeness, exception resolution time, unsupported-dose rate and SUTRA sync integrity.
-
-See `docs/PILOT_SCORECARD.md`.
-
-## Relevant execution proof
-
-The architecture deliberately reuses capability already built by the team: governed evidence-linked workflows, permissioned supply-chain traceability concepts and a standalone SUTRA-ID Edge prototype for offline/assisted execution. These are used as implementation credibility, not represented as Government production integrations.
+The committed tests cover deterministic nutrient safety, forecast quantile ordering, stock-out censoring, hierarchy reconciliation, allocation source-floor protection, TraceGraph tamper detection, Sentinel human-review boundaries, RAJ-NUTRI hard prohibitions and SUTRA idempotent sync.
 
 ## Repository structure
 
@@ -165,12 +139,11 @@ The architecture deliberately reuses capability already built by the team: gover
 │   ├── ARCHITECTURE.md
 │   ├── INTEGRATION_TRUTH.md
 │   ├── EVALUATOR_DEFENSE.md
-│   └── PILOT_SCORECARD.md
-├── tests/test_release_gates.py
-├── NOTICE.md
-└── SECURITY.md
+│   ├── PILOT_SCORECARD.md
+│   └── OPERATIONS_CONSOLE_V4.md
+└── tests/test_release_gates.py
 ```
 
 ## Claim discipline
 
-RAJ-URVARA is an evaluator sandbox, not a production Government service. It contains no Government secrets, Aadhaar values or farmer PII. References to Rajasthan/GoI systems describe public evidence or proposed authorized integrations and do not imply endorsement or production access.
+RAJ-URVARA AI is an evaluator sandbox, not a production Government service. It contains no Government secrets, Aadhaar values or real farmer PII. References to Rajasthan/GoI systems describe public evidence or proposed authorized integrations and do not imply endorsement or production access.

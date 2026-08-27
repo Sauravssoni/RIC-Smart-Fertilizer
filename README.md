@@ -359,6 +359,3 @@ Current committed proof suite is designed to test nutrient safety, forecast orde
 
 ---
 
-## Submission safety check
-
-The portal text copied during preparation displayed **“State-wide Implementation of AgriStack — Unified Digital Agriculture Ecosystem.”** That is a different active challenge. **Do not upload RAJ-URVARA to an AgriStack-labelled Apply Now page. Confirm the final page title reads “AI/ML-Driven Smart Fertilizer Formulation & Distribution Framework” before submission.**

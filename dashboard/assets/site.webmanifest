@@ -1,0 +1,13 @@
+{
+  "name": "RAJ-URVARA AI — Rajasthan Fertilizer Operations OS",
+  "short_name": "RAJ-URVARA",
+  "description": "Rajasthan Fertilizer Intelligence & Trust Grid evaluator prototype by Syntheon Tech Private Limited.",
+  "start_url": "/dashboard/",
+  "scope": "/dashboard/",
+  "display": "standalone",
+  "background_color": "#eef3f7",
+  "theme_color": "#073e72",
+  "icons": [
+    {"src": "raj-urvara-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}

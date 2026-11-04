@@ -1,0 +1,5 @@
+Rajasthan 41-district map — public-domain (CC0 1.0) asset.
+Source: https://commons.wikimedia.org/wiki/File:2025_Rajasthan_State_New_41_District_Map.jpg
+Author: ProfessorVJ. Date: 3 April 2025. Source marked Own work.
+Hosted locally in this prototype to prevent broken third-party map fetches during evaluation.
+Administrative map is a reference backdrop, not a verified live Government GIS data feed.

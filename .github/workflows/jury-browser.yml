@@ -1,7 +1,7 @@
 name: Jury browser verification
 on:
   push:
-    branches: [eval/nov26-urvara-decision-integrity]
+    branches: [eval/urvara-final-v15]
   pull_request:
 permissions:
   contents: read
@@ -17,4 +17,8 @@ jobs:
           python3 -m http.server 8000 > /tmp/urvara-server.log 2>&1 &
           sleep 2
           node tests/jury-browser.cjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v15-jury-screenshots
+          path: jury-*.png
       - run: python3 -m unittest discover -s tests -p 'test_*.py' -v

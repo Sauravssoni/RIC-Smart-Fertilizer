@@ -1,8 +1,7 @@
 name: Jury browser verification
 on:
   push:
-    branches: [eval/nov26-urvara-decision-integrity]
-  pull_request:
+    branches: [eval/nov26-public-verification]
 permissions:
   contents: read
 jobs:
@@ -14,7 +13,8 @@ jobs:
       - run: npm install --no-save playwright@1.51.1
       - run: npx playwright install --with-deps chromium
       - run: |
-          python3 -m http.server 8000 > /tmp/urvara-server.log 2>&1 &
-          sleep 2
           node tests/jury-browser.cjs
-      - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-jury-desktop-mobile-screenshots
+          path: jury-*.png
